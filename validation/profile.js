@@ -1,5 +1,5 @@
-const Validator = require('validator')
-const isEmpty = require('./is-empty')
+const Validator = require('validator');
+const isEmpty = require('./is-empty');
 
 module.exports = function validateProfileInput(data) {
   let errors = {};
@@ -10,60 +10,59 @@ module.exports = function validateProfileInput(data) {
 
 
   if (!Validator.isLength(data.handle, { min: 2, max: 40 })) {
-    errors.handle = 'Handle needs to be between 2 and 4 characters'
+    errors.handle = 'Handle needs to be between 2 and 4 characters';
   }
 
   if (Validator.isEmpty(data.handle)) {
-    errors.handle = 'Profile handle is required'
+    errors.handle = 'Profile handle is required';
   }
 
   if (Validator.isEmpty(data.status)) {
-    errors.status = 'Status handle is required'
+    errors.status = 'Status field is required';
   }
 
   if (Validator.isEmpty(data.skills)) {
-    errors.skills = 'Skills handle is required'
+    errors.skills = 'Skills field is required';
   }
 
   if (!isEmpty(data.website)) {
     if (!Validator.isURL(data.website)) {
-      errors.website = 'Not a valid url'
+      errors.website = 'Not a valid url';
     }
   }
 
   if (!isEmpty(data.youtube)) {
     if (!Validator.isURL(data.youtube)) {
-      errors.youtube = 'Not a valid url'
+      errors.youtube = 'Not a valid url';
     }
   }
 
   if (!isEmpty(data.twitter)) {
     if (!Validator.isURL(data.twitter)) {
-      errors.twitter = 'Not a valid url'
+      errors.twitter = 'Not a valid url';
     }
   }
 
   if (!isEmpty(data.facebook)) {
     if (!Validator.isURL(data.facebook)) {
-      errors.facebook = 'Not a valid url'
+      errors.facebook = 'Not a valid url';
     }
   }
 
   if (!isEmpty(data.linkedin)) {
     if (!Validator.isURL(data.linkedin)) {
-      errors.linkedin = 'Not a valid url'
+      errors.linkedin = 'Not a valid url';
     }
-
   }
   if (!isEmpty(data.instagram)) {
     if (!Validator.isURL(data.instagram)) {
-      errors.instagram = 'Not a valid url'
+      errors.instagram = 'Not a valid url';
     }
   }
 
 
   return {
     errors,
-    isValid: isEmpty(errors)
-  }
-}
+    isValid: isEmpty(errors),
+  };
+};
