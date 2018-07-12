@@ -35,12 +35,13 @@ class Register extends Component {
 
   onSubmit = e => {
     e.preventDefault();
+
     const newUser = {
       name: this.state.name,
       email: this.state.email,
       password: this.state.password,
       password2: this.state.password2
-    }
+    };
 
     this.props.registerUser(newUser, this.props.history)
 
@@ -56,7 +57,7 @@ class Register extends Component {
             <div className="col-md-8 m-auto">
               <h1 className="display-4 text-center">Sign Up</h1>
               <p className="lead text-center">Create your Imagine Doodles account</p>
-              <form onSubmit={this.onSubmit}>
+              <form noValidate onSubmit={this.onSubmit}>
                 <TextFieldGroup
                   placeholder='Name'
                   name='name'
@@ -82,9 +83,9 @@ class Register extends Component {
                   error={errors.password}
                 />
                 <TextFieldGroup
-                  placeholder='Password'
+                  placeholder='Confirm Password'
                   name='password2'
-                  type='password2'
+                  type='password'
                   value={this.state.password2}
                   onChange={this.onChange}
                   error={errors.password2}
@@ -107,7 +108,7 @@ Register.propTypes = {
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
-  errors: state.errors,
+  errors: state.errors
 })
 
 export default connect(mapStateToProps, { registerUser })(withRouter(Register));
