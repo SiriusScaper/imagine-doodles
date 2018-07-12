@@ -7,10 +7,11 @@ import TextAreaFieldGroup from '../common/TextAreaFieldGroup'
 import InputGroup from '../common/InputGroup'
 import SelectListGroup from '../common/SelectListGroup'
 import { createProfile, getCurrentProfile } from '../../actions/profileActions'
+import isEmpty from '../../validation/is-empty'
 
 
 
-class EditProfile extends Component {
+class CreateProfile extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -40,6 +41,44 @@ class EditProfile extends Component {
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors })
     }
+
+    if (nextProps.profile.profile) {
+      const profile = nextProps.profile.profile
+
+      // Bring skills array back to CSV
+      const skillsCSV = profile.skills.join(',')
+
+      // Check if profile field exists, make empty string if not
+      profile.company = !isEmpty(profile.company) ? profile.company : ''
+      profile.website = !isEmpty(profile.website) ? profile.website : ''
+      profile.location = !isEmpty(profile.location) ? profile.location : ''
+      profile.githubusername = !isEmpty(profile.githubusername) ? profile.githubusername : ''
+      profile.bio = !isEmpty(profile.bio) ? profile.bio : ''
+      profile.social = !isEmpty(profile.social) ? profile.social : {};
+      profile.twitter = !isEmpty(profile.social.twitter) ? profile.social.twitter : ''
+      profile.facebook = !isEmpty(profile.social.facebook) ? profile.social.facebook : ''
+      profile.linkedin = !isEmpty(profile.social.linkedin) ? profile.social.linkedin : ''
+      profile.youtube = !isEmpty(profile.social.youtube) ? profile.social.youtube : ''
+      profile.instagram = !isEmpty(profile.social.instagram) ? profile.social.instagram : ''
+
+      // Set component fields state
+      this.setState({
+        handle: profile.handle,
+        company: profile.company,
+        website: profile.website,
+        location: profile.location,
+        status: profile.status,
+        skills: skillsCSV,
+        githubusername: profile.githubusername,
+        bio: profile.bio,
+        twitter: profile.twitter,
+        facebook: profile.facebook,
+        linkedin: profile.linkedin,
+        youtube: profile.youtube,
+        instagram: profile.instagram,
+      })
+    }
+
   }
 
   onSubmit = e => {
@@ -141,10 +180,7 @@ class EditProfile extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
-              <h1 className="display-4 text-center">Create Your Profile</h1>
-              <p className="lead text-center">
-                Let's get some information to make your profile stand out
-              </p>
+              <h1 className="display-4 text-center">Edit Profile</h1>
               <small className="d-block pb-3">* = Required fields</small>
               <form onSubmit={this.onSubmit}>
                 <TextFieldGroup
@@ -240,7 +276,7 @@ class EditProfile extends Component {
 }
 
 CreateProfile.propTypes = {
-  createPorfile: PropTypes.func.isRequired,
+  createProfile: PropTypes.func.isRequired,
   getCurrentProfile: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
@@ -251,4 +287,4 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(mapStateToProps, { createProfile, getCurrentProfile })(withRouter(EditProfile))
+export default connect(mapStateToProps, { createProfile, getCurrentProfile })(withRouter(CreateProfile))
