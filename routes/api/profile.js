@@ -59,18 +59,20 @@ router.get('/all', (req, res) => {
 // @access  Public
 
 router.get('/handle/:handle', (req, res) => {
-  const errors = {}
+  const errors = {};
+
   Profile.findOne({ handle: req.params.handle })
     .populate('user', ['name', 'avatar'])
-    .then((profile) => {
+    .then(profile => {
       if (!profile) {
-        errors.noprofile = 'There is no profile for this user'
-        res.status(404).json(errors)
+        errors.noprofile = 'There is no profile for this user';
+        res.status(404).json(errors);
       }
-      res.json(profile)
+
+      res.json(profile);
     })
-    .catch(err => res.status(404).json(err))
-})
+    .catch(err => res.status(404).json(err));
+});
 
 // @Route   Get api/profile/user/:user_id
 // @desc    Get profile by user ID
