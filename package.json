@@ -1,7 +1,7 @@
 {
-  "name": "devconnector",
+  "name": "imagine doodles",
   "version": "1.0.0",
-  "description": "Practice MERN social network",
+  "description": "Full Stack MERN app utilizing custom API to load Google Doodles",
   "main": "server.js",
   "scripts": {
     "client-install": "npm install --prefix client",
@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/SiriusScaper/practice-devconnector.git"
+    "url": "git+ssh://git@github.com/SiriusScaper/imagine-doodles.git"
   },
   "author": "Ryan Uselmann",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/SiriusScaper/practice-devconnector/issues"
+    "url": "https://github.com/SiriusScaper/imagine-doodles/issues"
   },
-  "homepage": "https://github.com/SiriusScaper/practice-devconnector#readme",
+  "homepage": "https://github.com/SiriusScaper/imagine-doodles#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
